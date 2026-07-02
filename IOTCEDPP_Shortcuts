@@ -1,0 +1,205 @@
+Shortcut: IOTCEDPP
+
+Scan QR code or barcode
+
+Get URLs from QR/Barcode
+
+Show alert: URLs
+
+Get contents of URLs
+  Method: GET
+  Headers:
+    Accept: application/vnd.iotcedpp.capture+json
+
+Show alert: Contents of URL
+
+Get dictionary from Contents of URL
+
+Show alert: Dictionary
+
+Get Value for links in Dictionary
+
+Show alert: Dictionary Value
+
+Get First Item from Dictionary Value
+
+Show alert: Item from List
+
+Get Value for href in Item from List
+
+Show alert: Dictionary Value
+
+If Dictionary Value has any value
+
+    Text
+      POST IoT sensor data
+
+    Show alert: Text
+
+    List
+      Location
+      Activity
+      Battery
+      Condition
+      Availability
+      Weather
+      Manual
+
+    Choose from List
+
+    Show alert: Selected Item
+
+    Set variable SensorType to Selected Item
+
+    Show alert: SensorType
+
+    If SensorType contains Location
+
+        Get current location
+
+        Get Latitude from Current Location
+
+        Get Longitude from Current Location
+
+        Text
+          Lat: [Latitude], Lon: [Longitude]
+
+        Show alert: Text
+
+        Set variable SensorValue to Text
+
+    Otherwise
+
+        If SensorType contains Activity
+
+            Get Physical Activity
+
+            Text
+              Physical Movement: [Get Physical Activity]
+
+            Show alert: Text
+
+            Set variable SensorValue to Text
+
+        Otherwise
+
+            If SensorType contains Battery
+
+                Get Battery Level
+
+                Text
+                  Battery: [Battery State]
+
+                Show alert: Text
+
+                Set variable SensorValue to Text
+
+            Otherwise
+
+                If SensorType contains Condition
+
+                    Get Mobile Service network's Network Provider Name
+
+                    Get Mobile Service network's Country Code
+
+                    Get Mobile Service network's Radio Technology
+
+                    Get Mobile Service network's Number of Signal Bars
+
+                    Text
+                      Condition: [Network Details], [Network Details], [Network Details], [Network Details]
+
+                    Show alert: Text
+
+                    Set variable SensorValue to Text
+
+                Otherwise
+
+                    If SensorType contains Availability
+
+                        Get Wi-Fi network's Network Name
+
+                        Get Wi-Fi network's Wi-Fi Standard
+
+                        Get Wi-Fi network's RSSI
+
+                        Get current IP address
+
+                        Text
+                          Availability: [Network Details], [Network Details], [Network Details], [Current IP Address]
+
+                        Show alert: Text
+
+                        Set variable SensorValue to Text
+
+                    Otherwise
+
+                        If SensorType contains Weather
+
+                            Get current weather at Current Location
+
+                            Get Condition from Weather Conditions
+
+                            Get Temperature from Weather Conditions
+
+                            Text
+                              Weather: [Condition], [Temperature]
+
+                            Set variable SensorValue to Text
+
+                        Otherwise
+
+                            If SensorType contains Manual
+
+                                Type
+
+                                Text
+                                  Measurement: [Measurement]
+
+                                Show alert: Text
+
+                                Set variable SensorValue to Text
+
+                            Otherwise
+
+                                Show alert: No Sensor Type List
+
+                            End If
+
+                        End If
+
+                    End If
+
+                End If
+
+            End If
+
+        End If
+
+    End If
+
+    Show alert: If Result
+
+    Get the System Version
+
+    Set variable OperatorID to System Version
+
+    Get contents of [Dictionary Value / URL field hidden in screenshot]
+      Method: POST
+      Headers:
+        Content-Type: application/json
+      Request Body: JSON
+        sensor_type: SensorType
+        sensor_value: SensorValue      
+        operator_uoi: iPhone - OperatorID
+
+    Show alert: Contents of URL
+
+Otherwise
+
+    Text
+      No redirect - cannot capture IoT endpoint nor send IoT sensor data
+
+End If
+Show alert: If Result
+Stop this shortcut
